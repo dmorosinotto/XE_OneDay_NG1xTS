@@ -44,10 +44,7 @@ public class SubscriptionPoco
 
     [Column("IsPresent")]
     public bool IsPresent { get; set; }
-
-    [Column("MemberId")]
-    public int? MemberId { get; set; }
-
+    
 }
 
 

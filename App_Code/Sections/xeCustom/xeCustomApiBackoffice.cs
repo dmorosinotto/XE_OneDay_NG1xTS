@@ -51,12 +51,6 @@ public class xeCustomApiBackofficeController : UmbracoAuthorizedJsonController
                 subscriptionData.SubscriptionDate = DateTime.Now;
                 subscriptionData.ConfirmationDate = null;
                 subscriptionData.IsPresent = false;
-                IMember socio = mbr.GetByEmail(model.Email);
-                if (socio == null) {
-                    subscriptionData.MemberId = null;
-                } else {
-                    subscriptionData.MemberId = socio.Id;
-                }
 
                 //Inserisco l'iscrizione nel database
                 var insertResult = db.Insert(subscriptionData);
@@ -148,7 +142,7 @@ public class xeCustomApiBackofficeController : UmbracoAuthorizedJsonController
 
 
     private string BuildSQL(string where) { //Query per leggere dati da tabella custom XE_EventSubscription --> tipo dati SubscriptionPoco
-        return "SELECT [Id],[EventId],[Name],[Surname],[Email],[City],[ConfirmationKey],[IsConfirmed],[SubscriptionDate],[ConfirmationDate],[IsPresent],[MemberId] FROM [Xe_EventSubscription] " + where;
+        return "SELECT [Id],[EventId],[Name],[Surname],[Email],[City],[ConfirmationKey],[IsConfirmed],[SubscriptionDate],[ConfirmationDate],[IsPresent] FROM [Xe_EventSubscription] " + where;
     }
 
     private bool FAKESENDMAIL(string email, string body) {
