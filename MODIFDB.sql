@@ -20,6 +20,7 @@ CREATE TABLE [dbo].[Xe_EventSubscription](
 
 GO
 
+
 IF ((SELECT COUNT(*) FROM [dbo].[Xe_EventSubscription] WHERE EventId=9999)=0) 
 BEGIN
 
@@ -33,6 +34,7 @@ INSERT INTO [dbo].[Xe_EventSubscription](EventId,Name,Surname,Email,City,Confirm
 (9999,'a','b','c@d.it',NULL,'72FA5237-0B80-41B5-95B2-A227CA3918B2',0,'2016-04-03 23:47:31.530',NULL,0)
 
 END
+
 
 IF ((SELECT COUNT(*) FROM [dbo].[Xe_EventSubscription] WHERE EventId=8888)=0) 
 BEGIN
