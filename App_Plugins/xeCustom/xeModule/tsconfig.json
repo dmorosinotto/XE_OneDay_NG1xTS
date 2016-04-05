@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        //"module": "commonjs",
+        "target": "es5",
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "outFile": "../backoffice/app_bundle.js"
+    },
+    "exclude": [
+        "node_modules"
+        //,"typings/main.d.ts"
+        //,"typings/main/**"
+    ]
+}

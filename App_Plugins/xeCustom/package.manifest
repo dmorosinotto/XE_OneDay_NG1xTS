@@ -1,0 +1,9 @@
+﻿{
+    "javascript" : [
+		'~/App_Plugins/xeCustom/backoffice/app_bundle.js',
+		'~/App_Plugins/xeCustom/backoffice/xeModule.js'
+    ]
+	,"css": [
+		'~/App_Plugins/xeCustom/backoffice/xeCustomTree/barcode.css'
+	]
+}

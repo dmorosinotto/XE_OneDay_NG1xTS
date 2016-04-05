@@ -1,0 +1,28 @@
+﻿@media print {
+    * {padding: 5px; margin: 0px; line-height: 10px} 
+    td {border-bottom: 1px solid}
+    body.PrintNO * {
+        visibility: hidden !important;
+    }
+    #PrintIT, #PrintIT * {
+        visibility: visible !important;
+        overflow: visible !important;
+    }
+    #PrintIT {
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+}
+
+/*  Code39Azalea Copyright 2012 Jerry Whiting (CC BY-ND 3.0) azalea.com/web-fonts/  */
+@font-face
+{
+font-family: Code39;
+src: url('/fonts/Code39Azalea.eot') format('embedded-opentype'), /* IE9 Compat Modes */
+   url('/fonts/Code39Azalea.woff') format('woff'), /* Modern Browsers */
+   url('/fonts/Code39Azalea.ttf') format('truetype'), /* Safari, Android, iOS */
+   url('/fonts/Code39Azalea.svg#Code39Azalea') format('svg'); /* Legacy iOS */
+font-weight: normal;
+font-style: normal;
+}

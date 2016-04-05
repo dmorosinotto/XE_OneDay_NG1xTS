@@ -1,0 +1,52 @@
+﻿<div ng-controller="BarcodeCtrl as ctrl">
+    <umb-panel>
+        <umb-header>
+            <div class="umb-headline-editor-wrapper span12">
+                <h3>
+                    {{currEvent.title}}
+                    <button type="submit" data-hotkey="ctrl+p" class="btn btn-success PrintNO" ng-click="ctrl.print()">
+                        Stampa
+                    </button>
+                </h3>
+                <xe-counter data="ctrl.subscriptions"></xe-counter>
+            </div>
+        </umb-header>
+
+        <umb-tab-view>
+            <umb-tab id="tab1" rel="svensson" class="active">
+                <div class="umb-pane">
+
+                    <div class="umb-listview">
+                        <div id="PrintIT">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td><b>Partecipante</b></td>
+                                        <td><b>Barcode</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="s in ctrl.subscriptions | orderBy: ['Surname','Name'] ">
+                                        <td>
+                                            <h3>{{s.Surname}} {{s.Name}}</h3>
+                                            <p>{{s.Email}}</p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <br />
+                                                <div style="font-family:Code39; font-size:50px;">*{{barcode(s.Id)}}*</div>
+                                                <br />
+                                            </p>
+                                            <h4>{{barcode(s.Id)}}</h4>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </umb-tab>
+        </umb-tab-view>
+    </umb-panel>
+</div>

@@ -1,0 +1,1 @@
+tsc -pretty -w -p . 

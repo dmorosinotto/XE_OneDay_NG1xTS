@@ -1,0 +1,33 @@
+﻿<umb-panel>
+    <umb-header>
+        <div class="umb-headline-editor-wrapper span12">
+            <h1>{{ctrl.currEvent.title}}</h1>
+            <xe-counter data="ctrl.currEvent.subscriptions" max="ctrl.currEvent.maxSubscriptions" limit="ctrl.currEvent.subscriptionLimit"></xe-counter>
+        </div>
+    </umb-header>
+
+    <umb-tab-view>
+        <umb-tab id="tab1" rel="svensson" class="active">
+            <div class="umb-pane">
+                <div class="umb-listview">
+                    <xe-filter on-filter="search = $event" on-refresh="ctrl.currEvent.loadData()"></xe-filter>
+
+                    <div class="row">
+                        <div class="span8 pull-left">
+                            <h3>Lista Partecipanti</h3>
+                        </div>
+                        <div class="pull-right">
+                            <xe-registration eventid="ctrl.currEvent.eventId" on-registration="ctrl.currEvent.loadData()"></xe-registration>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <xe-list data="ctrl.currEvent.subscriptions" curr-filter="search" on-delete="ctrl.currEvent.delete($event)" on-check="ctrl.currEvent.toggle($event)"
+                                   on-barcode="ctrl.currEvent.barcode($event)" on-email="ctrl.currEvent.email($event)"></xe-list>
+                    </div>
+                </div>
+
+            </div>
+        </umb-tab>
+    </umb-tab-view>
+</umb-panel>
