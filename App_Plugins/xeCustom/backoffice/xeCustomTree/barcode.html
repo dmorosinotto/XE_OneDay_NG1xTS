@@ -3,7 +3,7 @@
         <umb-header>
             <div class="umb-headline-editor-wrapper span12">
                 <h3>
-                    {{currEvent.title}}
+                    {{ctrl.currEvent.title}}
                     <button type="submit" data-hotkey="ctrl+p" class="btn btn-success PrintNO" ng-click="ctrl.print()">
                         Stampa
                     </button>
@@ -34,10 +34,10 @@
                                         <td>
                                             <p>
                                                 <br />
-                                                <div style="font-family:Code39; font-size:50px;">*{{barcode(s.Id)}}*</div>
+                                                <div style="font-family:Code39; font-size:50px;">*{{ctrl.barcode(s.Id)}}*</div>
                                                 <br />
                                             </p>
-                                            <h4>{{barcode(s.Id)}}</h4>
+                                            <h4>{{ctrl.barcode(s.Id)}}</h4>
                                         </td>
                                     </tr>
                                 </tbody>

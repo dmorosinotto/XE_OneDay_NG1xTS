@@ -1,17 +1,18 @@
 ﻿namespace xeModule.Controllers {
     
     export class BarcodeCtrl {
-        static $inject = ["$routeParams", "XeApiSvc"];
-        constructor(routeParams: ng.route.IRouteParamsService, private api: Services.XeApiSvc) {
-            var e = routeParams["id"] || 1121  //$scope.dialogOptions.currentNode.id.split("|");
+        static $inject = ["XeApiSvc","$scope"];
+        constructor(private api: Services.XeApiSvc, currTreeNode: any) {
+            var e = currTreeNode.dialogOptions.currentNode.id.split("|");
             this.currEvent = {
                 eventId: +e[0] || 0,
                 title: e[1] || "",
                 maxSubscriptions: +e[2] || 0,
                 subscriptionLimit: +e[3] || 0
             }
+            alert(JSON.stringify(this.currEvent));
             //call service to get all subscriptions
-            api.getEventSubscriptions(this.currEvent.eventId).then(data => this.subscriptions = data);
+            api.getEventSubscriptions(this.currEvent.eventId).then(data => { alert(data.length); this.subscriptions = data });
         }
 
         public subscriptions: Models.ISubscription[];
