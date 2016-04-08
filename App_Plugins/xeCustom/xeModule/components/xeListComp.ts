@@ -6,17 +6,17 @@
             controller: "xeListCtrl",
             template: `
 <table class="table">
-    <thead>
+    <thead ng-sort="ctrl.order">
         <tr>
-            <td>Nome</td>
-            <td>Cognome</td>
-            <td>Email</td>
-            <td>Citt&agrave;</td>
-            <td>Azioni</td>
+            <td ng-sortby="Name">Nome</td>
+            <td ng-sortby="Surname">Cognome</td>
+            <td ng-sortby="Email">Email</td>
+            <td ng-sortby="City">Citt&agrave;</td>
+            <td ng-sortby="IsPresent">Azioni</td>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="s in ctrl.data | filter: ctrl.currFilter :strict | orderBy: 'Name'" 
+        <tr ng-repeat="s in ctrl.data | filter: ctrl.currFilter :strict | orderBy: ctrl.order" 
             ng-class="{error: (!s.IsConfirmed && !s.IsPresent), success: s.IsPresent}">
             <td><b>{{s.Name}}</b></td>
             <td><b>{{s.Surname}}</b></td>
@@ -38,8 +38,10 @@
 namespace xeModule.Controllers {
     export class xeListCtrl {
         constructor() {
+           this.order="Name";
         }
-
+        public order: string;
+        
         public data: Models.ISubscription[];
         public currFilter: any;
         public onDelete: Models.IEventHandler<Models.ISubscription>;

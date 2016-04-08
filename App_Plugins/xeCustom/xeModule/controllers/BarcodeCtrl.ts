@@ -10,7 +10,6 @@
                 maxSubscriptions: +e[2] || 0,
                 subscriptionLimit: +e[3] || 0
             }
-            alert(JSON.stringify(this.currEvent));
             //call service to get all subscriptions
             api.getEventSubscriptions(this.currEvent.eventId).then(data => { alert(data.length); this.subscriptions = data });
         }
