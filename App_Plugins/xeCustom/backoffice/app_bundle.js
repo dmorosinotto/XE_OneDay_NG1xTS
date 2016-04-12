@@ -385,7 +385,6 @@ var xeModule;
             };
             xeNewSubsCtrl.prototype.Save = function () {
                 var _this = this;
-                alert(JSON.stringify(this.data));
                 //chiamata API per salvare i dati sul DB
                 this.api.newSubscription(this.data)
                     .then(function (r) { return r.data; }, function (e) {
@@ -541,10 +540,12 @@ var xeModule;
     var Controllers;
     (function (Controllers) {
         var BarcodeCtrl = (function () {
-            function BarcodeCtrl(api, currTreeNode) {
+            function BarcodeCtrl(api, currTreeNode, $routeParams) {
                 var _this = this;
                 this.api = api;
-                var e = currTreeNode.dialogOptions.currentNode.id.split("|");
+                //var e = currTreeNode.dialogOptions.currentNode.id.split("|"); //inject into $scope by umbraco when opening command actions palette
+                var id = (currTreeNode.dialogOptions && currTreeNode.dialogOptions.currentNode && currTreeNode.dialogOptions.currentNode.id) || $routeParams["id"];
+                var e = id.split("|");
                 this.currEvent = {
                     eventId: +e[0] || 0,
                     title: e[1] || "",
@@ -552,7 +553,7 @@ var xeModule;
                     subscriptionLimit: +e[3] || 0
                 };
                 //call service to get all subscriptions
-                api.getEventSubscriptions(this.currEvent.eventId).then(function (data) { alert(data.length); _this.subscriptions = data; });
+                api.getEventSubscriptions(this.currEvent.eventId).then(function (data) { _this.subscriptions = data; });
             }
             BarcodeCtrl.prototype.barcode = function (id) {
                 var code39 = String(id);
@@ -566,10 +567,24 @@ var xeModule;
                 window.print();
                 document.body.classList.remove("PrintNO");
             };
-            BarcodeCtrl.$inject = ["XeApiSvc", "$scope"];
+            BarcodeCtrl.$inject = ["XeApiSvc", "$scope", "$routeParams"];
             return BarcodeCtrl;
         }());
         Controllers.BarcodeCtrl = BarcodeCtrl;
+    })(Controllers = xeModule.Controllers || (xeModule.Controllers = {}));
+})(xeModule || (xeModule = {}));
+var xeModule;
+(function (xeModule) {
+    var Controllers;
+    (function (Controllers) {
+        var SmartMainCtrl = (function () {
+            function SmartMainCtrl($routeParams, $scope) {
+                this.routeParamId = $scope.routeParamId = $routeParams["id"];
+            }
+            SmartMainCtrl.$inject = ["$routeParams", "$scope"];
+            return SmartMainCtrl;
+        }());
+        Controllers.SmartMainCtrl = SmartMainCtrl;
     })(Controllers = xeModule.Controllers || (xeModule.Controllers = {}));
 })(xeModule || (xeModule = {}));
 var xeModule;

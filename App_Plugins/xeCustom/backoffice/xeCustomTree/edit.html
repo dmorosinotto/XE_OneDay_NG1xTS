@@ -1,9 +1,3 @@
-﻿<div ng-controller="SmartMainCtrl">
-    <xe-smart-main route-param-id="routeParamId"></xe-smart-main>
+﻿<div ng-controller="SmartMainCtrl as ctrl">
+    <xe-smart-main route-param-id="ctrl.routeParamId"></xe-smart-main>
 </div>
-
-<script>
-    function SmartMainCtrl($scope, $routeParams) {
-        $scope.routeParamId = $routeParams.id;
-    }
-</script>

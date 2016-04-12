@@ -1,9 +1,11 @@
 ﻿namespace xeModule.Controllers {
     
     export class BarcodeCtrl {
-        static $inject = ["XeApiSvc","$scope"];
-        constructor(private api: Services.XeApiSvc, currTreeNode: any) {
-            var e = currTreeNode.dialogOptions.currentNode.id.split("|");
+        static $inject = ["XeApiSvc","$scope","$routeParams"];
+        constructor(private api: Services.XeApiSvc, currTreeNode: any, $routeParams: ng.route.IRouteParamsService) {
+            //var e = currTreeNode.dialogOptions.currentNode.id.split("|"); //inject into $scope by umbraco when opening command actions palette
+            var id = (currTreeNode.dialogOptions && currTreeNode.dialogOptions.currentNode && currTreeNode.dialogOptions.currentNode.id) || $routeParams["id"]; 
+            var e = id.split("|");
             this.currEvent = {
                 eventId: +e[0] || 0,
                 title: e[1] || "",
@@ -11,7 +13,7 @@
                 subscriptionLimit: +e[3] || 0
             }
             //call service to get all subscriptions
-            api.getEventSubscriptions(this.currEvent.eventId).then(data => { alert(data.length); this.subscriptions = data });
+            api.getEventSubscriptions(this.currEvent.eventId).then(data => { this.subscriptions = data; });
         }
 
         public subscriptions: Models.ISubscription[];

@@ -39,7 +39,6 @@ namespace xeModule.Controllers {
         }
 
         protected Save() {
-            alert(JSON.stringify(this.data));
             //chiamata API per salvare i dati sul DB
             this.api.newSubscription(this.data)
                 .then(r => r.data,
