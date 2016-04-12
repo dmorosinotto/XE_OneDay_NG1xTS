@@ -15,7 +15,7 @@
                 {{label}}
             </label>
             <div class="controls controls-row">
-                <input ng-model="model" ng-required="isReq=='true'" class="umb-editor umb-textstring textstring">
+                <input name="{{label}}" ng-model="model" ng-required="isReq=='true'" class="umb-editor umb-textstring textstring">
             </div>
         </div>
     </div>

@@ -17,7 +17,8 @@
                             <h3>Lista Partecipanti</h3>
                         </div>
                         <div class="pull-right">
-                            <xe-registration eventid="ctrl.currEvent.eventId" on-registration="ctrl.currEvent.loadData()"></xe-registration>
+                            <!-- <xe-registration eventid="ctrl.currEvent.eventId" on-registration="ctrl.currEvent.loadData()"></xe-registration> -->
+                            <xe-new-subs eventid="ctrl.currEvent.eventId" on-registration="ctrl.currEvent.loadData()"></xe-new-subs>
                         </div>
                     </div>
 

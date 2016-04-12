@@ -347,6 +347,76 @@ var xeModule;
 (function (xeModule) {
     var Directives;
     (function (Directives) {
+        function xeNewSubs(VIEWDIR) {
+            return ngUtils.makeComponent({
+                inputs: ["eventid"],
+                outputs: ["onRegistration"],
+                controller: "xeNewSubsCtrl",
+                template: VIEWDIR + 'xenewsubs.html'
+            });
+        }
+        Directives.xeNewSubs = xeNewSubs;
+        xeNewSubs.$inject = ["XECUSTOM_VIEWDIR"];
+    })(Directives = xeModule.Directives || (xeModule.Directives = {}));
+})(xeModule || (xeModule = {}));
+var xeModule;
+(function (xeModule) {
+    var Controllers;
+    (function (Controllers) {
+        var xeNewSubsCtrl = (function () {
+            function xeNewSubsCtrl(api, msg) {
+                this.api = api;
+                this.msg = msg;
+            }
+            xeNewSubsCtrl.prototype.toggleInsert = function () {
+                //mostra la form di inserimento dati
+                this.inInsert = !this.inInsert;
+                //initializza il model data con dei valori default (EventId + Privacy=true)
+                if (this.inInsert)
+                    this.data = {
+                        Name: "", Surname: "", Email: "", City: "",
+                        EventId: this.eventid,
+                        Privacy: true
+                    };
+            };
+            xeNewSubsCtrl.prototype.Cancel = function () {
+                //nasconde la form di inserimento dati
+                this.inInsert = false;
+            };
+            xeNewSubsCtrl.prototype.Save = function () {
+                var _this = this;
+                alert(JSON.stringify(this.data));
+                //chiamata API per salvare i dati sul DB
+                this.api.newSubscription(this.data)
+                    .then(function (r) { return r.data; }, function (e) {
+                    if (e.status == 400) {
+                        _this.msg.showError("Formato dati inviati non valido, controllare che l'Email sia valida !", "ERROR 400");
+                    }
+                    else if (e.status == 409) {
+                        _this.msg.showError("Iscrizione non accettata, esiste gia' una registrazione con questa Email !", "ERROR 409");
+                    }
+                    else {
+                        _this.msg.showError("ERROR " + e.status, "Errore nella iscrizione");
+                    }
+                })
+                    .then(function (s) {
+                    if (s) {
+                        //nasconde la form inserimento ed emette evento onRegistration per notificare padre dell'avvenuta registrazione
+                        _this.inInsert = false;
+                        _this.onRegistration({ $event: s });
+                    }
+                });
+            };
+            xeNewSubsCtrl.$inject = ["XeApiSvc", "MsgboxSvc"];
+            return xeNewSubsCtrl;
+        }());
+        Controllers.xeNewSubsCtrl = xeNewSubsCtrl;
+    })(Controllers = xeModule.Controllers || (xeModule.Controllers = {}));
+})(xeModule || (xeModule = {}));
+var xeModule;
+(function (xeModule) {
+    var Directives;
+    (function (Directives) {
         function xeRegistration() {
             return ngUtils.makeComponent({
                 inputs: ["eventid"],
@@ -460,7 +530,7 @@ var xeModule;
                     model: '=',
                     isReq: '@'
                 },
-                template: "\n<div class=\"umb-property\" property=\"property\">\n    <div class=\"control-group umb-control-group\">\n        <div class=\"umb-el-wrap\">\n            <label class=\"control-label\">\n                {{label}}\n            </label>\n            <div class=\"controls controls-row\">\n                <input ng-model=\"model\" ng-required=\"isReq=='true'\" class=\"umb-editor umb-textstring textstring\">\n            </div>\n        </div>\n    </div>\n</div>\n"
+                template: "\n<div class=\"umb-property\" property=\"property\">\n    <div class=\"control-group umb-control-group\">\n        <div class=\"umb-el-wrap\">\n            <label class=\"control-label\">\n                {{label}}\n            </label>\n            <div class=\"controls controls-row\">\n                <input name=\"{{label}}\" ng-model=\"model\" ng-required=\"isReq=='true'\" class=\"umb-editor umb-textstring textstring\">\n            </div>\n        </div>\n    </div>\n</div>\n"
             };
         }
         Directives.xeTextboxDir = xeTextboxDir;
