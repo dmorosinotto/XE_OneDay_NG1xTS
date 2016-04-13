@@ -30,9 +30,9 @@ namespace xeModule.Directives {
 namespace xeModule.Controllers {
     export class ngSortCtrl {
         constructor() {
-            this.icon = "fa fa-fw";
-            this.iconAsc = "fa fa-sort-amount-asc fa-fw";
-            this.iconDesc = "fa fa-sort-amount-desc fa-fw";
+            this.icon = "icon-";
+            this.iconAsc = " icon-chevron-up";
+            this.iconDesc = " icon-chevron-down";
             this.cols = [];
         }
         

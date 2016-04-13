@@ -1,0 +1,27 @@
+{
+  "name": "xe_oneday_ng1_ts",
+  "version": "1.0.0",
+  "description": "XE OneDay NG1 + TS (Fake Umbraco JSON Server)",
+  "main": "index.html",
+  "scripts": {
+    "start": "node  node_modules/json-server/bin  --watch ./fake/db.json  --id Id  --routes ./fake/routes.json  --static ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmorosinotto/XE_OneDay_NG1xTS.git"
+  },
+  "keywords": [
+    "Typescript",
+    "Angular",
+    "Umbraco"
+  ],
+  "author": "Daniele Morosinotto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmorosinotto/XE_OneDay_NG1xTS/issues"
+  },
+  "homepage": "https://github.com/dmorosinotto/XE_OneDay_NG1xTS#readme",
+  "devDependencies": {
+    "json-server": "^0.8.9"
+  }
+}

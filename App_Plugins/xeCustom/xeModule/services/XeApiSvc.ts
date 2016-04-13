@@ -18,8 +18,9 @@
                 .then(r => (r.status==200), e => { this.logErrorAPI(e); return false });
         }
 
-        public togglePresent(subscriptionId: number): ng.IPromise<Models.ISubscription> {
-            return this.http.put<Models.ISubscription>(this.BASEAPI + "TogglePresent/" + subscriptionId, {})
+        public togglePresent(s: Models.ISubscription): ng.IPromise<Models.ISubscription> {
+            s.IsPresent = !s.IsPresent;
+            return this.http.put<Models.ISubscription>(this.BASEAPI + "TogglePresent/" + s.Id, s)
                 .then(r => r.data, e => this.logErrorAPI(e));
         }
 

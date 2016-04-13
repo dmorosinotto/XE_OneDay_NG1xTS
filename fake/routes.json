@@ -1,0 +1,6 @@
+{
+    "/umbraco/backoffice/xeCustom/xeCustomApiBackoffice/GetEventSubscriptions/:id" : "/Events/:id/subscriptions",
+    "/umbraco/backoffice/xeCustom/xeCustomApiBackoffice/NewSubscription": "/subscriptions",
+    "/umbraco/backoffice/xeCustom/xeCustomApiBackoffice/DelSubscription/:id": "/subscriptions/:id",
+    "/umbraco/backoffice/xeCustom/xeCustomApiBackoffice/TogglePresent/:id": "/subscriptions/:id"
+}

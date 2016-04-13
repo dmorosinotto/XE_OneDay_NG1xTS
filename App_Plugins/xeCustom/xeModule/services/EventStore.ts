@@ -32,7 +32,7 @@
         }
 
         public toggle(s: Models.ISubscription) {
-            this.api.togglePresent(s.Id)
+            this.api.togglePresent(s)
                 .then(r => {
                     var idx = this.subscriptions.indexOf(s);
                     this.subscriptions.splice(idx, 1, r);

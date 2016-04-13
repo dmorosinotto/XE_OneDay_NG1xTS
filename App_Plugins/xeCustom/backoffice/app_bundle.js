@@ -34,9 +34,9 @@ var xeModule;
     (function (Controllers) {
         var ngSortCtrl = (function () {
             function ngSortCtrl() {
-                this.icon = "fa fa-fw";
-                this.iconAsc = "fa fa-sort-amount-asc fa-fw";
-                this.iconDesc = "fa fa-sort-amount-desc fa-fw";
+                this.icon = "icon-";
+                this.iconAsc = " icon-chevron-up";
+                this.iconDesc = " icon-chevron-down";
                 this.cols = [];
             }
             ngSortCtrl.prototype.register = function (sortby) {
@@ -325,7 +325,7 @@ var xeModule;
                 inputs: ["data", "currFilter"],
                 outputs: ["onDelete", "onBarcode", "onEmail", "onCheck"],
                 controller: "xeListCtrl",
-                template: "\n<table class=\"table\">\n    <thead ng-sort=\"ctrl.order\">\n        <tr>\n            <td ng-sortby=\"Name\">Nome</td>\n            <td ng-sortby=\"Surname\">Cognome</td>\n            <td ng-sortby=\"Email\">Email</td>\n            <td ng-sortby=\"City\">Citt&agrave;</td>\n            <td ng-sortby=\"IsPresent\">Azioni</td>\n        </tr>\n    </thead>\n    <tbody>\n        <tr ng-repeat=\"s in ctrl.data | filter: ctrl.currFilter :strict | orderBy: ctrl.order\" \n            ng-class=\"{error: (!s.IsConfirmed && !s.IsPresent), success: s.IsPresent}\">\n            <td><b>{{s.Name}}</b></td>\n            <td><b>{{s.Surname}}</b></td>\n            <td>{{s.Email}}</td>\n            <td>{{s.City}}</td>\n            <td>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onDelete({$event:s})\"><i class=\"icon-trash\"></i></button>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onBarcode({$event:s})\"><i class=\"icon-barcode\"></i></button>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onEmail({$event:s})\"><i class=\"icon-message\"></i></button>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onCheck({$event:s})\"><i ng-class=\"s.IsPresent ? 'icon-checkbox' : 'icon-checkbox-empty'\"></i></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n" });
+                template: "\n<table class=\"table\">\n    <thead ng-sort=\"ctrl.order\">\n        <tr>\n            <td ng-sortby=\"Name\">Nome</td>\n            <td ng-sortby=\"Surname\">Cognome</td>\n            <td ng-sortby=\"Email\">Email</td>\n            <td ng-sortby=\"City\">Citt&agrave;</td>\n            <td ng-sortby=\"IsPresent\">Azioni</td>\n        </tr>\n    </thead>\n    <tbody>\n        <tr ng-repeat=\"s in ctrl.data | filter: ctrl.currFilter :strict | orderBy: ctrl.order\" \n            ng-class=\"{error: (!s.IsConfirmed && !s.IsPresent), success: s.IsPresent}\">\n            <td><b>{{s.Name}}</b></td>\n            <td><b>{{s.Surname}}</b></td>\n            <td>{{s.Email}}</td>\n            <td>{{s.City}}</td>\n            <td>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onDelete({$event:s})\"><i class=\"icon-trash\"></i></button>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onBarcode({$event:s})\"><i class=\"icon-barcode\"></i></button>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onEmail({$event:s})\"><i class=\"icon-envelope\"></i></button>\n                <button class=\"btn btn-small\" ng-click=\"ctrl.onCheck({$event:s})\"><i ng-class=\"s.IsPresent ? 'icon-ok' : 'icon-remove'\"></i></button>\n            </td>\n        </tr>\n    </tbody>\n</table>\n" });
         }
         Directives.xeList = xeList;
     })(Directives = xeModule.Directives || (xeModule.Directives = {}));
@@ -620,7 +620,7 @@ var xeModule;
             };
             EventStore.prototype.toggle = function (s) {
                 var _this = this;
-                this.api.togglePresent(s.Id)
+                this.api.togglePresent(s)
                     .then(function (r) {
                     var idx = _this.subscriptions.indexOf(s);
                     _this.subscriptions.splice(idx, 1, r);
@@ -708,9 +708,10 @@ var xeModule;
                 return this.http.delete(this.BASEAPI + "DelSubscription/" + subscriptionId)
                     .then(function (r) { return (r.status == 200); }, function (e) { _this.logErrorAPI(e); return false; });
             };
-            XeApiSvc.prototype.togglePresent = function (subscriptionId) {
+            XeApiSvc.prototype.togglePresent = function (s) {
                 var _this = this;
-                return this.http.put(this.BASEAPI + "TogglePresent/" + subscriptionId, {})
+                s.IsPresent = !s.IsPresent;
+                return this.http.put(this.BASEAPI + "TogglePresent/" + s.Id, s)
                     .then(function (r) { return r.data; }, function (e) { return _this.logErrorAPI(e); });
             };
             XeApiSvc.prototype.sendConfirmationEmail = function (subscriptionId) {

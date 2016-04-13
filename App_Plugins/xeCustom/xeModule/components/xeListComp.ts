@@ -25,8 +25,8 @@
             <td>
                 <button class="btn btn-small" ng-click="ctrl.onDelete({$event:s})"><i class="icon-trash"></i></button>
                 <button class="btn btn-small" ng-click="ctrl.onBarcode({$event:s})"><i class="icon-barcode"></i></button>
-                <button class="btn btn-small" ng-click="ctrl.onEmail({$event:s})"><i class="icon-message"></i></button>
-                <button class="btn btn-small" ng-click="ctrl.onCheck({$event:s})"><i ng-class="s.IsPresent ? 'icon-checkbox' : 'icon-checkbox-empty'"></i></button>
+                <button class="btn btn-small" ng-click="ctrl.onEmail({$event:s})"><i class="icon-envelope"></i></button>
+                <button class="btn btn-small" ng-click="ctrl.onCheck({$event:s})"><i ng-class="s.IsPresent ? 'icon-ok' : 'icon-remove'"></i></button>
             </td>
         </tr>
     </tbody>

@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>FAKE UMBRACO</title>
+    <link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.angularjs.org/1.1.5/angular.js"></script>
+    <script src="fake/umbraco.js"></script>
+    
+    <!-- LOAD CUSTOM xeModule AS DEFINED IN package.manifest -->
+    <script src="/App_Plugins/xeCustom/backoffice/app_bundle.js"></script>
+    <script src="/App_Plugins/xeCustom/backoffice/xeModule.js"></script>
+    <link href="/App_Plugins/xeCustom/backoffice/xeCustomTree/barcode.css" rel="stylesheet">
+</head>
+<body ng-app="umbraco">
+    <div class="row">
+        <b class="span4">FAKE UMBRACO</b>
+        <a class="span4" href="/#/barcode/9999|XE Cartoon">BARCODE</a>
+        <a class="span4" href="/#/edit/8888|Evento XE">EDIT</a>
+        <hr />
+    </div>
+    <div class="row span12">
+        <div ng-view></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "Events": [
+    {
+      "Id": 8888,
+      "Description": "Evento XE"
+    },
+    {
+      "Id": 9999,
+      "Description": "XE Cartoon"
+    }
+  ],
+  "subscriptions": [
+    {
+      "Id": 154,
+      "EventId": 8888,
+      "Name": "Mrs",
+      "Surname": "Y",
+      "Email": "mrs@y.com",
+      "City": null,
+      "ConfirmationKey": "4b5128e4-a452-458b-a532-912c339177fe",
+      "IsConfirmed": true,
+      "SubscriptionDate": "2016-04-03T11:27:55.363Z",
+      "ConfirmationDate": "2016-04-03T11:32:28.907Z",
+      "IsPresent": false,
+      "id": 154
+    },
+    {
+      "Id": 159,
+      "EventId": 8888,
+      "Name": "Mr",
+      "Surname": "X",
+      "Email": "mr@x.com",
+      "City": "Sssshhhhh it is a SECRET",
+      "ConfirmationKey": "9dd34840-1aee-419f-814c-87ffa02e5ee3",
+      "IsConfirmed": true,
+      "SubscriptionDate": "2016-04-03T11:27:33.01Z",
+      "ConfirmationDate": "2016-04-03T11:32:41.263Z",
+      "IsPresent": true,
+      "id": 159
+    },
+    {
+      "Id": 178,
+      "EventId": 8888,
+      "Name": "Mr",
+      "Surname": "Z",
+      "Email": "z@z.z",
+      "City": "",
+      "ConfirmationKey": "8c233a34-9850-4134-ae16-ebe0064d9191",
+      "IsConfirmed": false,
+      "SubscriptionDate": "2016-04-12T18:12:59.777Z",
+      "ConfirmationDate": null,
+      "IsPresent": false,
+      "id": 178
+    },
+    {
+      "Id": 151,
+      "EventId": 9999,
+      "Name": "Zio",
+      "Surname": "Perone",
+      "Email": "zio@paperone.it",
+      "City": "Paperopoli",
+      "ConfirmationKey": "6e47b265-dce8-430a-a4d8-07e16511ad99",
+      "IsConfirmed": true,
+      "SubscriptionDate": "2016-03-09T22:37:52.153Z",
+      "ConfirmationDate": "2016-03-09T22:38:16.8Z",
+      "IsPresent": false
+    },
+    {
+      "Id": 152,
+      "EventId": 9999,
+      "Name": "pippo",
+      "Surname": "pluto",
+      "Email": "pippo@pluto.it",
+      "City": null,
+      "ConfirmationKey": "26e34900-8650-4be0-9170-b03743cd2f5b",
+      "IsConfirmed": false,
+      "SubscriptionDate": "2016-04-02T04:24:34.447Z",
+      "ConfirmationDate": null,
+      "IsPresent": true
+    },
+    {
+      "Id": 166,
+      "EventId": 9999,
+      "Name": "a",
+      "Surname": "b",
+      "Email": "c@d.it",
+      "City": null,
+      "ConfirmationKey": "72fa5237-0b80-41b5-95b2-a227ca3918b2",
+      "IsConfirmed": false,
+      "SubscriptionDate": "2016-04-03T23:47:31.53Z",
+      "ConfirmationDate": null,
+      "IsPresent": false
+    }
+  ]
+}

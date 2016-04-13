@@ -1,0 +1,25 @@
+angular.module("umbraco", [])
+.factory("notificationsService", function(){
+  function show(prefix) {
+    return function (title,msg) {
+        window.alert(prefix + (title||"").toUpperCase() + ": \n" + msg);
+    }
+  }
+  return {
+      success: show(""),
+      error: show("ERROR - "),
+      info: show("INFO - "),
+      warning: show("WARN - ")
+  }
+})
+.config(function($routeProvider) {
+  $routeProvider
+   .when('/edit/:id', {
+    templateUrl: '/App_Plugins/xeCustom/backoffice/xeCustomTree/edit.html',
+    controller: 'SmartMainCtrl'
+  })
+  .when('/barcode/:id', {
+    templateUrl: '/App_Plugins/xeCustom/backoffice/xeCustomTree/barcode.html',
+    controller: 'BarcodeCtrl'
+  });
+});

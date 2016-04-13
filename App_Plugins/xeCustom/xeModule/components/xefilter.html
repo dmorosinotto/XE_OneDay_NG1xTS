@@ -1,12 +1,12 @@
 ﻿<div class="row">
     <div class="span3">
-        <button class="btn" ng-click="ctrl.onRefresh()"><i class="icon-sync"></i></button>
+        <button class="btn" ng-click="ctrl.onRefresh()"><i class="icon-refresh"></i></button>
         <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <button class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                 <!--{{ctrl.bindFilter.IsPresent ? 'Solo presenti' : (ctrl.bindFilter.IsConfirmed ? 'Solo confermati' : 'Tutti iscritti')}}-->
                 {{ctrl.getFilterType()}}
                 <span class="caret"></span>
-            </a>
+            </button>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#" ng-click="ctrl.setFilter($event,-1)">
