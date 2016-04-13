@@ -26,3 +26,9 @@ modo da creare la tabella `Xe_EventSubscription` e caricarci dentro dei dati di 
 Infine per visualizzare le pagine e' necessario accedere al backend di Umbraco da
 http://your_local_site/umbraco autentificarsi come amministratore, e poi nella sezione
 Users abilitare per il proprio utente la sezione [xeCustom] spuntandola.
+
+###FAKE UMBRACO
+E' possibile eseguire in locale una pagina (FAKE) che simula il minimo dell'ambiente Umbraco 
+necessario a far girare l'applicazione e senza bisogno di IIS e Umbraco installato!
+- Dalla cartella root del progetto installare *json-server* eseguendo   `npm install`
+- Per lanciare il server usare il comando   `npm start`     e poi aprire [http://localhost:3000](http://localhost:3000)  
