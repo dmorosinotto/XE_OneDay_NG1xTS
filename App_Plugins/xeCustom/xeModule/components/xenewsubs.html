@@ -13,11 +13,21 @@
                     <div class="umb-pane">
                         <div class="umb-listview">
 
-                            <xe-textbox-dir label="Nome" model="ctrl.data.Name" is-req="true"></xe-textbox-dir>
-                            <xe-textbox-dir label="Cognome" model="ctrl.data.Surname" is-req="true"></xe-textbox-dir>
-                            <xe-textbox-dir label="Email" model="ctrl.data.Email" is-req="true"></xe-textbox-dir>
-                            <xe-textbox-dir label="Citta" model="ctrl.data.City" is-req="false"></xe-textbox-dir>
-
+                            <xe-textbox-dir name="Name" label="Nome" model="ctrl.data.Name" is-req="true"
+                                            is-valid="frm.Name.$valid || frm.Name.$pristine" err-message="*nome obbligatorio"></xe-textbox-dir>
+                            <xe-textbox-dir name="Surname" label="Cognome" model="ctrl.data.Surname" is-req="true"
+                                            is-valid="frm.Surname.$valid || frm.Surname.$pristine" err-message="*cognome obbligatorio"></xe-textbox-dir>
+                            <xe-textbox-dir type="email" name="Email" label="Email" model="ctrl.data.Email" is-req="true"
+                                            is-valid="frm.Email.$valid || frm.Email.$pristine" err-message="*email obbligatoria"></xe-textbox-dir>
+                            <xe-textbox-dir name="City" is-valid="true" label="Citta" model="ctrl.data.City" is-req="false"></xe-textbox-dir> 
+<pre ng-if="!frm.$valid">    
+    Name    val={{frm.Name.$valid}}     - err={{frm.Name.$error}}
+    Surname val={{frm.Surname.$valid}}  - err={{frm.Surname.$error}}
+    Email   val={{frm.Email.$valid}}    - err={{frm.Email.$error}}
+    $valid={{frm.$valid | json}}
+    $error={{frm.$error | json}}
+    form={{frm}}
+</pre>
                         </div>
                     </div>
                 </umb-tab>

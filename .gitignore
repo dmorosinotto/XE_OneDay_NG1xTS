@@ -1,5 +1,6 @@
 # Node
 node_modules
+typings
 
 ## OS X
 .DS_Store

@@ -527,9 +527,20 @@ var xeModule;
                 scope: {
                     label: '@',
                     model: '=',
-                    isReq: '@'
+                    isReq: '@',
+                    isValid: '=',
+                    errMessage: '@'
                 },
-                template: "\n<div class=\"umb-property\" property=\"property\">\n    <div class=\"control-group umb-control-group\">\n        <div class=\"umb-el-wrap\">\n            <label class=\"control-label\">\n                {{label}}\n            </label>\n            <div class=\"controls controls-row\">\n                <input name=\"{{label}}\" ng-model=\"model\" ng-required=\"isReq=='true'\" class=\"umb-editor umb-textstring textstring\">\n            </div>\n        </div>\n    </div>\n</div>\n"
+                template: function (tElement, tAttrs) {
+                    var name = tAttrs.name || tAttrs.label;
+                    var type = tAttrs.type || "text";
+                    //STO TORNANDO UNA FUNZIONE CHE RITORNA DINAMICAMENTE L'HTML CON IL name="xxx" DELL'INPUT ATTUALIZZATO!
+                    //PERCHE' HO IL PROBLEMA CHE <input name="{{label}}" NON VIENE VALUTATA IN MODO CORRETTO
+                    //O MEGLIO FORSE VIENE INTERPOLATA TROPPO TARDI E QUESTO CAUSA IL PROBLEMA CHE NG-MODEL 
+                    //NON HA IL name="xxx" ASSOCIATO E QUINDI POI NON RIESCO A GESTIRE I CAMPI DI VALIDAZIONE
+                    //DALL'ESTERNO $scopeController.frmName.inputName.$valid , $pristine , $error , etc... COSI INVECE FUNZIONA!
+                    return "\n<div class=\"umb-property\" property=\"property\">\n    <div class=\"control-group umb-control-group\" ng-class=\"{'error': !isValid}\">\n        <div class=\"umb-el-wrap\">\n            <label class=\"control-label\" for=\"" + name + "\">\n                {{label}}\n            </label>\n            <div class=\"controls controls-row\">\n                <input type=\"" + type + "\" name=\"" + name + "\" ng-model=\"model\" ng-required=\"isReq=='true'\" class=\"umb-editor umb-textstring textstring\">\n                <span ng-if=\"!isValid\" class=\"help-inline\">{{errMessage}}</span>\n            </div>\n        </div>\n    </div>\n</div>\n";
+                }
             };
         }
         Directives.xeTextboxDir = xeTextboxDir;
