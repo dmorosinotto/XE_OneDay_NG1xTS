@@ -1,0 +1,59 @@
+﻿<button class="btn" ng-click="ctrl.toggleInsert()">Nuova Registrazione</button>
+<div ng-if="ctrl.inInsert">
+    <form name="frm" ng-submit="ctrl.Save()">
+        <umb-panel>
+            <umb-header tabs="content.tabs">
+                <div class="umb-headline-editor-wrapper span12">
+                    <h2>Nuova registrazione</h2>
+                </div>
+            </umb-header>
+
+            <umb-tab-view>
+                <umb-tab id="tab1" rel="svensson" class="active">
+                    <div class="umb-pane">
+                        <div class="umb-listview">
+
+                            <xe-textbox-cnt name="Name" label="Nome" is-valid="frm.Name.$valid || frm.Name.$pristine" err-message="*nome obbligatorio pippo!">
+                                <input name="Name" ng-model="ctrl.data.Name" xe-validator="ctrl.validators.name(val)" ng-change="ctrl.changed('NAME')">
+                            </xe-textbox-cnt>
+                            <xe-textbox-cnt name="Surname" label="Cognome" is-valid="frm.Surname.$valid || frm.Surname.$pristine" err-message="*cognome obbligatorio">
+                                <input name="Surname" ng-model="ctrl.data.Surname" ng-required="true"  ng-change="ctrl.changed('SURNAME')">
+                            </xe-textbox-cnt>
+                            <xe-textbox-cnt name="Email" label="E-mail" is-valid="frm.Email.$valid || frm.Email.$pristine" err-message="*email deve contenere @">
+                                <input name="Email" ng-model="ctrl.data.Email" required xe-validator="ctrl.validators.mail(val)" ng-change="ctrl.changed('EMAIL')"/>
+                            </xe-textbox-cnt>
+                            <xe-textbox-cnt name="City" label="Citta" model="ctrl.data.City" is-valid="frm.City.$valid" err-message="*deve essere uguale a nome" >
+                                <input name="City" ng-model="ctrl.data.City" xe-validator="ctrl.validators.city(val)" ng-change="ctrl.changed('CITY')" >
+                            </xe-textbox-cnt>
+                             
+<pre ng-if="!frm.$valid">    
+    data = {{ctrl.data | json}}
+    
+    Name    val={{frm.Name.$valid}}     - err={{frm.Name.$error}}
+    Surname val={{frm.Surname.$valid}}  - err={{frm.Surname.$error}}
+    Email   val={{frm.Email.$valid}}    - err={{frm.Email.$error}}
+    City    val={{frm.City.$valid}}     - err={{frm.City.$error}}
+    
+    $valid={{frm.$valid | json}}
+    $error={{frm.$error | json}}
+    form = {{frm | json}}
+    
+</pre>
+                        </div>
+                    </div>
+                </umb-tab>
+            </umb-tab-view>
+
+            <div class="umb-panel-footer">
+                <div class="btn-toolbar umb-btn-toolbar pull-right">
+                    <a class="btn btn-link" data-hotkey="esc" ng-click="ctrl.Cancel()">
+                        <localize key="cancel">Cancel</localize>
+                    </a>
+                    <button type="submit" data-hotkey="ctrl+s" class="btn btn-success" ng-disabled="!frm.$valid">
+                        <localize key="buttons_save">Save</localize>
+                    </button>
+                </div>
+            </div>
+        </umb-panel>
+    </form>
+</div>

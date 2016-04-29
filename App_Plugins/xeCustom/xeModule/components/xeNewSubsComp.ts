@@ -4,7 +4,7 @@
             inputs: ["eventid"],
             outputs: ["onRegistration"],
             controller: "xeNewSubsCtrl",
-            template: VIEWDIR + 'xenewsubs.html'
+            template: VIEWDIR + 'xenewsubscnt.html' //'xenewsubs.html'
         });
     }
     xeNewSubs.$inject = ["XECUSTOM_VIEWDIR"];
@@ -14,6 +14,11 @@ namespace xeModule.Controllers {
     export class xeNewSubsCtrl {
         static $inject = ["XeApiSvc", "MsgboxSvc"];
         constructor(private api: Services.XeApiSvc, private msg: Services.MsgboxSvc) {
+            this.validators = { //CUSTOM LOGIC FOR VALIDATION
+                name: (val) => val=="pippo",  //MUST BE PIPPO
+                mail: (val) => (val as string).indexOf("@")>0, //MUST CONTAINS @
+                city: (val) => val==this.data.Name //MUST BE === NAME === PIPPO!
+            }
         }
 
         public eventid: number;
@@ -21,7 +26,7 @@ namespace xeModule.Controllers {
 
         protected inInsert: boolean;
         protected data: Models.IRegistration;
-
+        protected validators: {[name: string]: (val:any)=>boolean};
         protected toggleInsert() {
             //mostra la form di inserimento dati
             this.inInsert = !this.inInsert;
@@ -31,6 +36,11 @@ namespace xeModule.Controllers {
                 EventId: this.eventid,
                 Privacy: true
             };
+        }
+        
+        
+        protected changed(e: any) {
+            console.log("NG-CHANGE",e);
         }
 
         protected Cancel() {

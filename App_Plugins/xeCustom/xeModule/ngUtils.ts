@@ -37,10 +37,12 @@
         ddo.scope = {};
         Bindings.forEach(b => ddo.scope[b.locProp] = //su versioni <1.5 faccio fallback binding '=' al posto di '<'
             (ver>="1.5" ? b.type : b.type.replace('<','=')) + b.extAttr);
+        /*
         //se sono su angular>1.3 abilito bindToController per riportre in-out nel controllerAs
         if (Bindings.length>0 && ver >= "1.3") { 
             ddo.bindToController = true;
         } //altrimento simulo bindToController usando la link function per "syncronizzare" in-out scope<-->ctrl
+        */
         //setto il template o il templateUrl controllando se il valore passato e' html o un url
         if (template) {
             if (template.lastIndexOf(".html")>0 && template.indexOf("<")<0 && template.indexOf(">")<0 ) {
@@ -92,11 +94,11 @@
                     scope[ctrlAs][req] = ctrl;   
                 }
                 //life-cycle hooks
-                if (typeof scope[ctrlAs].$onInit === "function") {
-                    scope[ctrlAs].$onInit({scope, el, attr, ctrl});
+                if (typeof scope[ctrlAs].OnInit === "function") {
+                    scope[ctrlAs].OnInit({scope, el, attr, ctrl});
                 }
-                if (typeof scope[ctrlAs].$onDestroy === "function") {
-                    scope.$on("$destroy", () => scope[ctrlAs].$onDestroy());
+                if (typeof scope[ctrlAs].OnDestroy === "function") {
+                    scope.$on("$destroy", () => scope[ctrlAs].OnDestroy());
                 }
             }
         }

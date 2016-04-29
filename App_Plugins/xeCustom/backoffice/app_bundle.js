@@ -62,7 +62,7 @@ var xeModule;
         var ngSortbyCtrl = (function () {
             function ngSortbyCtrl() {
             }
-            ngSortbyCtrl.prototype.$onInit = function () {
+            ngSortbyCtrl.prototype.OnInit = function () {
                 this.ngSort.register(this);
             };
             ngSortbyCtrl.prototype.Toggle = function () {
@@ -97,10 +97,12 @@ var ngUtils;
         ddo.scope = {};
         Bindings.forEach(function (b) { return ddo.scope[b.locProp] =
             (ver >= "1.5" ? b.type : b.type.replace('<', '=')) + b.extAttr; });
+        /*
         //se sono su angular>1.3 abilito bindToController per riportre in-out nel controllerAs
-        if (Bindings.length > 0 && ver >= "1.3") {
+        if (Bindings.length>0 && ver >= "1.3") {
             ddo.bindToController = true;
         } //altrimento simulo bindToController usando la link function per "syncronizzare" in-out scope<-->ctrl
+        */
         //setto il template o il templateUrl controllando se il valore passato e' html o un url
         if (template) {
             if (template.lastIndexOf(".html") > 0 && template.indexOf("<") < 0 && template.indexOf(">") < 0) {
@@ -152,11 +154,11 @@ var ngUtils;
                     scope[ctrlAs][req] = ctrl;
                 }
                 //life-cycle hooks
-                if (typeof scope[ctrlAs].$onInit === "function") {
-                    scope[ctrlAs].$onInit({ scope: scope, el: el, attr: attr, ctrl: ctrl });
+                if (typeof scope[ctrlAs].OnInit === "function") {
+                    scope[ctrlAs].OnInit({ scope: scope, el: el, attr: attr, ctrl: ctrl });
                 }
-                if (typeof scope[ctrlAs].$onDestroy === "function") {
-                    scope.$on("$destroy", function () { return scope[ctrlAs].$onDestroy(); });
+                if (typeof scope[ctrlAs].OnDestroy === "function") {
+                    scope.$on("$destroy", function () { return scope[ctrlAs].OnDestroy(); });
                 }
             };
         }
@@ -352,7 +354,7 @@ var xeModule;
                 inputs: ["eventid"],
                 outputs: ["onRegistration"],
                 controller: "xeNewSubsCtrl",
-                template: VIEWDIR + 'xenewsubs.html'
+                template: VIEWDIR + 'xenewsubscnt.html' //'xenewsubs.html'
             });
         }
         Directives.xeNewSubs = xeNewSubs;
@@ -365,8 +367,14 @@ var xeModule;
     (function (Controllers) {
         var xeNewSubsCtrl = (function () {
             function xeNewSubsCtrl(api, msg) {
+                var _this = this;
                 this.api = api;
                 this.msg = msg;
+                this.validators = {
+                    name: function (val) { return val == "pippo"; },
+                    mail: function (val) { return val.indexOf("@") > 0; },
+                    city: function (val) { return val == _this.data.Name; } //MUST BE === NAME === PIPPO!
+                };
             }
             xeNewSubsCtrl.prototype.toggleInsert = function () {
                 //mostra la form di inserimento dati
@@ -378,6 +386,9 @@ var xeModule;
                         EventId: this.eventid,
                         Privacy: true
                     };
+            };
+            xeNewSubsCtrl.prototype.changed = function (e) {
+                console.log("NG-CHANGE", e);
             };
             xeNewSubsCtrl.prototype.Cancel = function () {
                 //nasconde la form di inserimento dati
@@ -499,23 +510,48 @@ var xeModule;
             function xeSmartMainCtrl(api, msg) {
                 this.api = api;
                 this.msg = msg;
+                this.safeInit();
             }
             Object.defineProperty(xeSmartMainCtrl.prototype, "routeParamId", {
                 set: function (value) {
-                    if (value) {
-                        this.currEvent = new xeModule.Models.EventStore(this.api, this.msg, value);
-                        this.currEvent.loadData();
-                    }
+                    this._routeParamId = value;
+                    this.safeInit();
                 },
                 enumerable: true,
                 configurable: true
             });
             ;
+            xeSmartMainCtrl.prototype.safeInit = function () {
+                if (this._routeParamId && this.msg && this.api) {
+                    this.currEvent = new xeModule.Models.EventStore(this.api, this.msg, this._routeParamId);
+                    this.currEvent.loadData();
+                }
+            };
             xeSmartMainCtrl.$inject = ["XeApiSvc", "MsgboxSvc"];
             return xeSmartMainCtrl;
         }());
         Controllers.xeSmartMainCtrl = xeSmartMainCtrl;
     })(Controllers = xeModule.Controllers || (xeModule.Controllers = {}));
+})(xeModule || (xeModule = {}));
+var xeModule;
+(function (xeModule) {
+    var Directives;
+    (function (Directives) {
+        function xeTextboxCnt() {
+            return {
+                restrict: 'E',
+                scope: {
+                    name: '@',
+                    label: '@',
+                    isValid: '=',
+                    errMessage: '@'
+                },
+                transclude: true,
+                template: "\n<div class=\"umb-property\" property=\"property\">\n    <div class=\"control-group umb-control-group\" ng-class=\"{'error': !isValid}\">\n        <div class=\"umb-el-wrap\">\n            <label class=\"control-label\" for=\"name\">\n                {{label}}\n            </label>\n            <div class=\"controls controls-row\">\n                <span class=\"umb-editor umb-textstring textstring\" ng-transclude></span>\n                <span ng-if=\"!isValid\" class=\"help-inline\">{{errMessage}}</span>\n            </div>\n        </div>\n    </div>\n</div>\n"
+            };
+        }
+        Directives.xeTextboxCnt = xeTextboxCnt;
+    })(Directives = xeModule.Directives || (xeModule.Directives = {}));
 })(xeModule || (xeModule = {}));
 var xeModule;
 (function (xeModule) {
@@ -544,6 +580,42 @@ var xeModule;
             };
         }
         Directives.xeTextboxDir = xeTextboxDir;
+    })(Directives = xeModule.Directives || (xeModule.Directives = {}));
+})(xeModule || (xeModule = {}));
+var xeModule;
+(function (xeModule) {
+    var Directives;
+    (function (Directives) {
+        function xeValidator() {
+            return {
+                restrict: 'A',
+                scope: {
+                    xeValidator: '&'
+                },
+                require: 'ngModel',
+                link: function (scope, element, attrs, ngModel) {
+                    var hasValidators = !!ngModel.$validators;
+                    //console.info("XE-VALIDATORS",hasValidators);
+                    if (hasValidators) {
+                        ngModel.$validators["xee"] = function (modelValue, viewValue) {
+                            var val = viewValue || modelValue;
+                            return scope.xeValidator({ val: val });
+                        };
+                    }
+                    else {
+                        //for older angular use $parsers to validate
+                        ngModel.$parsers.push(function (val) {
+                            //console.log("PARSE",val);
+                            var ok = scope.xeValidator({ val: val });
+                            ngModel.$setValidity("xe", ok);
+                            return ok ? val : undefined;
+                        });
+                    }
+                    //ngModel.$formatters.push( val => {console.log("FORMAT",val); return val;  } ); 
+                }
+            };
+        }
+        Directives.xeValidator = xeValidator;
     })(Directives = xeModule.Directives || (xeModule.Directives = {}));
 })(xeModule || (xeModule = {}));
 var xeModule;

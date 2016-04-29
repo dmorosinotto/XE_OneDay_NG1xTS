@@ -1,4 +1,4 @@
-angular.module("umbraco", [])
+angular.module("umbraco", (angular.version.full > "1.2") ? ["ngRoute"] : [] )
 .factory("notificationsService", function(){
   function show(prefix) {
     return function (title,msg) {

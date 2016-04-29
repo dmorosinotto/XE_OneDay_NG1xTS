@@ -26,7 +26,6 @@
     Email   val={{frm.Email.$valid}}    - err={{frm.Email.$error}}
     $valid={{frm.$valid | json}}
     $error={{frm.$error | json}}
-    form={{frm}}
 </pre>
                         </div>
                     </div>
@@ -36,7 +35,7 @@
             <div class="umb-panel-footer">
                 <div class="btn-toolbar umb-btn-toolbar pull-right">
                     <a class="btn btn-link" data-hotkey="esc" ng-click="ctrl.Cancel()">
-                        <localize key="cancel" />
+                        <localize key="cancel">Cancel</localize>
                     </a>
                     <button type="submit" data-hotkey="ctrl+s" class="btn btn-success" ng-disabled="!frm.$valid">
                         <localize key="buttons_save">Save</localize>

@@ -70,7 +70,7 @@ namespace xeModule.Controllers {
         
         private ngSort: ngSortCtrl;
         
-        public $onInit() {
+        public OnInit() {
             this.ngSort.register(this);
         }
 
