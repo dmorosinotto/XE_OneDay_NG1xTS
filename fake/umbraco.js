@@ -14,6 +14,9 @@ angular.module("umbraco", (angular.version.full > "1.2") ? ["ngRoute"] : [] )
 })
 .config(function($routeProvider) {
   $routeProvider
+   .when('/ngmeta', {
+     template: '<my-app>Loading...</my-app>',
+   })
    .when('/edit/:id', {
     templateUrl: '/App_Plugins/xeCustom/backoffice/xeCustomTree/edit.html',
     controller: 'SmartMainCtrl'
@@ -23,3 +26,4 @@ angular.module("umbraco", (angular.version.full > "1.2") ? ["ngRoute"] : [] )
     controller: 'BarcodeCtrl'
   });
 });
+

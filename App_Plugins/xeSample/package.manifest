@@ -1,0 +1,8 @@
+﻿{
+	"javascript" : [
+		'~/App_Plugins/xeSample/backoffice/app_bundle.js'
+	]
+	,"css": [
+		'~/App_Plugins/xeSample/backoffice/styles.css'
+	]
+}
