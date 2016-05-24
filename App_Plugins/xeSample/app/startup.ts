@@ -2,9 +2,9 @@
 import {bootstrap} from "ng-metadata/platform";
 import {AppModule} from "./app.module";
 
-// import CSS SystemJS will inject it into the document <head>
-import "/App_Plugins/xeSample/backoffice/dist/styles.css!"; // IMPORTING DIRECTLY CSS USING SYSTEMJS PLUGIN css!
-// ALTERNATIVE: import css = require("./styles.css"); // require external CSS relative path is based on 'app' source folder
+// INCLUDE CSS IN BUNDLE AND DYNAMICALLY LOAD IT TO HEAD STYLES WHEN RUN THIS
+const mycss = require("fs").readFileSync(__dirname + "/./styles.css", "utf-8");
+require("insert-css")(mycss);
 
 // inject module into umbraco
 angular.module("umbraco")

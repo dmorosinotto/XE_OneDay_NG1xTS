@@ -1,4 +1,3 @@
-// import * as angular from "angular"; // import angular globally
 import { provide } from "ng-metadata/core";
 
 import { AppCmp } from "./components/my-app.component";

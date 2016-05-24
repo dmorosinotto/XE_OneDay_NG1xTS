@@ -1,20 +1,12 @@
 import {Component, Inject} from "ng-metadata/core";
 import {QuestionSvc} from "../services/question.service";
-import {VIEWDIR} from "../app.path";
-// import html = require("./my-app.html"); // require external HTML relative path is based on 'app' source folder
 
-// IGNORE ERROR TS2307: Cannot find module './my-app.html' UNTIL ISSUE #6615 IS CLOSED(https://github.com/Microsoft/TypeScript/issues/6615)
-// OR USE IMPORT WITH FULLPATH TO LOAD THE TEMPLATE HERE
-// import * as html from "app/components/my-app.html";
-// AND HACK A CORRESPONDING DECLARE MODULE IN typings-manual-fix.d.ts
-// declare module "app/components/my-app.html" {
-//      const template: string;
-//      export default template;
-// }
+// UTILIZZO BRFS TRASFORM CHE RENDE QUESTA STRINGA INLINE HTML
+const template = require("fs").readFileSync(__dirname + "/./my-app.html", "utf-8");
 
 @Component({
     selector: "my-app",
-    templateUrl: VIEWDIR + "./my-app.html",
+    template,
 /*    template: `
 <h1>My First {{$ctrl.title}} App</h1>
 <ask question="{{$ctrl.question}}" on-response="$ctrl.show($event)"></ask>

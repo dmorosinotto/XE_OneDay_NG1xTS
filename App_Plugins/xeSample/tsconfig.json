@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "system",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false,
-    "outFile": "backoffice/app-bundle.js", //BUILD AND BUNDLE ALL TS --> JS 
-    "rootDir": "./" //NEEDED TO HAVE CORRECT MODULE DEF app/* IN BUNDLE
-  },
-  "files": [
-    "app/startup.ts", //ENTRY-POINT FOR APP USED TO TRAVERSE/COMPILE DEPENDENCY TO BUILD BUNDLE
-    "typings/browser.d.ts", //OTHER TYPESCRIPT DEFINITION FOR AMBIENT: angular, jquery, ...
-    "typings-manual-fix.d.ts" //NEEDED TO VALIDATE require() FOR HTML/CSS
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "outFile": "bundle.js",
+        "outDir": "dist"
+    },
+    "files": [
+        "app/startup.ts", 
+        "typings/browser.d.ts",
+        "typings-browserify.d.ts"
+    ]
 }

@@ -1,10 +1,11 @@
 import {Component, Input, Output, OnInit} from "ng-metadata/core";
+// TRICK CREATO FILE .html.ts CON DENTRO export default `...`
+import template from "./ask.component.html";
 
 
 @Component({
     selector: "ask",
-    template: `<b>Q:</b> {{$ctrl.question}} ? <input ng-model="$ctrl.response">
-               <button ng-click="$ctrl.answer()">Answer</button>`
+    template
 })
 export class AskCmp implements OnInit {
     @Input("@") public question: string; // specify input with '@' binding (interpolate)
