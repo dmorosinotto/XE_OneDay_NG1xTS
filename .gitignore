@@ -17,3 +17,9 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+## PRIVATE
+*.zip
+*.pptx
+*.webloc
+MATERIALE
